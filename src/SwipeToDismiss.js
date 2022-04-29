@@ -27,10 +27,12 @@ class SwipeToDismiss extends React.Component {
     this.node = findDOMNode(this);
 
     document.body.addEventListener('mouseup', this.onMouseUp);
+    document.body.addEventListener('touchend', this.onMouseUp);
   }
 
   componentWillUnmount() {
     document.body.removeEventListener('mouseup', this.onMouseUp);
+    document.body.removeEventListener('touchend', this.onMouseUp);
   }
 
   onMouseMove(event) {
@@ -38,6 +40,8 @@ class SwipeToDismiss extends React.Component {
       pressedPosition,
       removing,
     } = this.state;
+
+    const screenX = event.changedTouches?.[0]?.screenX || event.screenX
 
     const {
       distanceBeforeDismiss,
@@ -47,7 +51,7 @@ class SwipeToDismiss extends React.Component {
     if (removing) return;
 
     if (pressedPosition) {
-      let newPositionLeft = event.screenX - pressedPosition;
+      let newPositionLeft = screenX - pressedPosition;
       const directionValue = direction === 'right' ? 1 : -1;
       const newState = JSON.parse(JSON.stringify(this.state));
 
@@ -75,8 +79,10 @@ class SwipeToDismiss extends React.Component {
   }
 
   onMouseDown(event) {
+    const screenX = event.changedTouches?.[0]?.screenX || event.screenX
+
     this.setState({
-      pressedPosition: event.screenX,
+      pressedPosition: screenX,
       animate: false,
     });
   }
@@ -136,6 +142,8 @@ class SwipeToDismiss extends React.Component {
       style,
       onMouseMove: this.onMouseMove,
       onMouseDown: this.onMouseDown,
+      onTouchStart: this.onMouseDown,
+      onTouchMove: this.onMouseMove,
 
       className: child.props.className,
     };
