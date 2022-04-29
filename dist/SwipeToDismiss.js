@@ -1,15 +1,17 @@
 "use strict";
 
+function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+exports["default"] = void 0;
 Object.defineProperty(exports, "useSwipeToDismiss", {
   enumerable: true,
   get: function get() {
     return _useSwipeToDismiss["default"];
   }
 });
-exports["default"] = void 0;
 
 var _react = _interopRequireDefault(require("react"));
 
@@ -21,35 +23,37 @@ var _useSwipeToDismiss = _interopRequireDefault(require("./useSwipeToDismiss"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
 
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
 
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); Object.defineProperty(subClass, "prototype", { writable: false }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-var SwipeToDismiss =
-/*#__PURE__*/
-function (_React$Component) {
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } else if (call !== void 0) { throw new TypeError("Derived constructors may only return object or undefined"); } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+var SwipeToDismiss = /*#__PURE__*/function (_React$Component) {
   _inherits(SwipeToDismiss, _React$Component);
+
+  var _super = _createSuper(SwipeToDismiss);
 
   function SwipeToDismiss(props) {
     var _this;
 
     _classCallCheck(this, SwipeToDismiss);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(SwipeToDismiss).call(this, props));
+    _this = _super.call(this, props);
     _this.node = null;
     _this.state = {
       positionLeft: 0,
@@ -69,27 +73,32 @@ function (_React$Component) {
     value: function componentDidMount() {
       this.node = (0, _reactDom.findDOMNode)(this);
       document.body.addEventListener('mouseup', this.onMouseUp);
+      document.body.addEventListener('touchend', this.onMouseUp);
     }
   }, {
     key: "componentWillUnmount",
     value: function componentWillUnmount() {
       document.body.removeEventListener('mouseup', this.onMouseUp);
+      document.body.removeEventListener('touchend', this.onMouseUp);
     }
   }, {
     key: "onMouseMove",
     value: function onMouseMove(event) {
-      var _this2 = this;
+      var _event$changedTouches,
+          _event$changedTouches2,
+          _this2 = this;
 
       var _this$state = this.state,
           pressedPosition = _this$state.pressedPosition,
           removing = _this$state.removing;
+      var screenX = ((_event$changedTouches = event.changedTouches) === null || _event$changedTouches === void 0 ? void 0 : (_event$changedTouches2 = _event$changedTouches[0]) === null || _event$changedTouches2 === void 0 ? void 0 : _event$changedTouches2.screenX) || event.screenX;
       var _this$props = this.props,
           distanceBeforeDismiss = _this$props.distanceBeforeDismiss,
           direction = _this$props.direction;
       if (removing) return;
 
       if (pressedPosition) {
-        var newPositionLeft = event.screenX - pressedPosition;
+        var newPositionLeft = screenX - pressedPosition;
         var directionValue = direction === 'right' ? 1 : -1;
         var newState = JSON.parse(JSON.stringify(this.state));
 
@@ -116,8 +125,11 @@ function (_React$Component) {
   }, {
     key: "onMouseDown",
     value: function onMouseDown(event) {
+      var _event$changedTouches3, _event$changedTouches4;
+
+      var screenX = ((_event$changedTouches3 = event.changedTouches) === null || _event$changedTouches3 === void 0 ? void 0 : (_event$changedTouches4 = _event$changedTouches3[0]) === null || _event$changedTouches4 === void 0 ? void 0 : _event$changedTouches4.screenX) || event.screenX;
       this.setState({
-        pressedPosition: event.screenX,
+        pressedPosition: screenX,
         animate: false
       });
     }
@@ -174,6 +186,8 @@ function (_React$Component) {
         style: style,
         onMouseMove: this.onMouseMove,
         onMouseDown: this.onMouseDown,
+        onTouchStart: this.onMouseDown,
+        onTouchMove: this.onMouseMove,
         className: child.props.className
       };
       return _react["default"].cloneElement(child, newChildProps);
