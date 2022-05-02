@@ -4,5 +4,6 @@ package-lock.json
 node_modules/
 npm-debug.log
 example/node_modules
+yarn-error.log
 
 .DS_Store
