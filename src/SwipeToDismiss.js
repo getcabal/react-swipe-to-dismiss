@@ -72,7 +72,7 @@ class SwipeToDismiss extends React.Component {
       }
 
       newState.positionLeft = newPositionLeft;
-      newState.opacity = (100 - (newPositionLeft * directionValue * 100 / (this.node.offsetWidth * 2))) / 100;
+      newState.opacity = Math.max((100 - (newPositionLeft * directionValue * 100 / (this.node.offsetWidth * 2))) / 100, 1);
 
       this.setState(newState);
     }
