@@ -108,11 +108,11 @@ class SwipeToDismiss extends React.Component {
       removeDOM
     } = this.props;
 
+    onDismiss()
     setTimeout(() => {
       if (removeDOM) {
         this.node.remove()
       }
-      onDismiss()
     }, 300)
   }
 

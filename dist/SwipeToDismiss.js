@@ -155,12 +155,11 @@ var SwipeToDismiss = /*#__PURE__*/function (_React$Component) {
       var _this$props2 = this.props,
           onDismiss = _this$props2.onDismiss,
           removeDOM = _this$props2.removeDOM;
+      onDismiss();
       setTimeout(function () {
         if (removeDOM) {
           _this3.node.remove();
         }
-
-        onDismiss();
       }, 300);
     }
   }, {

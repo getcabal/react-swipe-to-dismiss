@@ -1,6 +1,6 @@
 {
   "name": "@getcabal/react-swipe-to-dismiss",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "description": "Swipe to dismiss Component for notifications",
   "main": "dist/SwipeToDismiss.js",
   "scripts": {
